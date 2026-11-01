@@ -1,0 +1,6 @@
+{
+  "name": "The Horcrux Ledger",
+  "description": "An antique Victorian artifact registry tracking Lord Voldemort's seven soul fragments with cryptic glitches, candlelight ambience, and Kapidhwaj ward containment.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

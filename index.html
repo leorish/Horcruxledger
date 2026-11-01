@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>The Horcrux Ledger — Lord Voldemort’s Secret Sanctuary</title>
+  <meta name="description" content="An antique Victorian artifact ledger tracking Lord Voldemort’s seven Horcruxes with cryptic glitches, candlelight ambience, and Kapidhwaj ward containment." />
+  <meta property="og:title" content="The Horcrux Ledger — Lord Voldemort’s Secret Sanctuary" />
+  <meta property="og:description" content="An antique Victorian artifact ledger tracking Lord Voldemort’s seven Horcruxes with cryptic glitches, candlelight ambience, and Kapidhwaj ward containment." />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts: Cinzel Decorative, IM Fell English, Cormorant Garamond -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet" />
+
+  <!-- Victorian Stylesheet -->
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <!-- Accessibility Skip Link -->
+  <a href="#main-ledger-grid" class="skip-link">Skip to artifact ledger</a>
+
+  <!-- Candlelight Radial Glow Element (Desktop) -->
+  <div id="candlelight-glow" aria-hidden="true"></div>
+
+  <!-- Ambient Vignette Overlay -->
+  <div class="vignette-overlay" aria-hidden="true"></div>
+
+  <!-- Swirling Particle Storm Canvas (Finale Celebration) -->
+  <canvas id="ember-canvas" aria-hidden="true"></canvas>
+
+  <!-- Ambient Dust Motes & Embers Canvas for Intro Scene -->
+  <canvas id="intro-motes-canvas" aria-hidden="true"></canvas>
+
+  <!-- Screen Reader Live Region for Seal Status -->
+  <div id="intro-live-region" class="sr-only" aria-live="polite"></div>
+
+  <!-- Gold Flash on Seal Break -->
+  <div id="seal-break-flash" class="seal-break-flash" aria-hidden="true"></div>
+
+  <!-- Sound Settings Floating Corner Popover Button -->
+  <div id="corner-sound-widget">
+    <button type="button" id="btn-sound-toggle" class="btn-sound-icon" aria-label="Ambience on/off" aria-pressed="false" title="Ambience on/off">
+      <span id="sound-icon-display">🔇</span>
+    </button>
+    <button type="button" id="btn-sound-settings" class="btn-sound-gear" aria-label="Audio settings and volume slider" title="Adjust Volume">⚙</button>
+    <div id="sound-popover-panel" role="region" aria-label="Sound Settings" aria-hidden="true">
+      <div class="sound-popover-title">Arcane Acoustics</div>
+      <div class="sound-control-row">
+        <label for="master-volume-slider">Master Volume</label>
+        <input type="range" id="master-volume-slider" min="0" max="1" step="0.05" value="0.5" aria-label="Master volume slider" />
+      </div>
+      <div class="sound-control-row">
+        <span>Sound Effects</span>
+        <button type="button" id="btn-sfx-toggle" class="btn-vintage-small" aria-pressed="true">SFX: ON</button>
+      </div>
+      <div class="sound-control-row">
+        <span>Haunted Ambience</span>
+        <button type="button" id="btn-ambience-toggle" class="btn-vintage-small" aria-pressed="false">Ambience: OFF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       OPENING RITUAL: THE SEALED LEDGER (PART 1)
+       ========================================================================== -->
+  <div id="sealed-intro" role="dialog" aria-modal="true" aria-label="Sealed Ledger of Horcruxes">
+    <div class="door-left" aria-hidden="true"></div>
+    <div class="door-right" aria-hidden="true"></div>
+
+    <div class="ledger-cover-perspective" id="ledger-cover-perspective">
+      <div class="ledger-cover-card" id="ledger-cover-card">
+        <!-- Filigree Corners -->
+        <div class="cover-filigree filigree-tl" aria-hidden="true">⚜</div>
+        <div class="cover-filigree filigree-tr" aria-hidden="true">⚜</div>
+        <div class="cover-filigree filigree-bl" aria-hidden="true">⚜</div>
+        <div class="cover-filigree filigree-br" aria-hidden="true">⚜</div>
+
+        <div class="sub-crest glitch-target">
+          <span>⚜</span> Private Register of Lord Voldemort <span>⚜</span>
+        </div>
+        <h1 class="intro-title glitch-target">The Horcrux Ledger</h1>
+        <p class="intro-subtitle glitch-target">
+          “Private register of Lord Voldemort. Unauthorised readers will be cursed.”
+        </p>
+
+        <!-- Wax Seal Native Button with SVG Progress Ring and Fracture Lines -->
+        <button type="button" class="wax-seal-wrapper" id="wax-seal-btn" aria-label="Press and hold to break the seal">
+          <!-- Circular Progress Ring SVG -->
+          <svg class="seal-progress-ring" viewBox="0 0 160 160" aria-hidden="true">
+            <circle class="ring-bg" cx="80" cy="80" r="74" />
+            <circle class="ring-fill" id="seal-ring-fill" cx="80" cy="80" r="74" />
+          </svg>
+
+          <!-- Wax Seal Main Body -->
+          <div class="wax-seal-main" id="wax-seal-element">
+            <!-- Left & Right Halves for Cracking Split Animation -->
+            <div class="seal-half seal-half-left">
+              <svg width="64" height="64" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" style="color: var(--gold-bright);">
+                <circle cx="50" cy="50" r="44" stroke-dasharray="4 2" />
+                <path d="M50 16 C35 24 30 38 42 50 C54 62 50 78 32 84" />
+                <text x="50" y="58" font-family="'Cinzel Decorative', serif" font-size="28" fill="var(--gold-bright)" text-anchor="middle">⚜</text>
+              </svg>
+            </div>
+            <div class="seal-half seal-half-right">
+              <svg width="64" height="64" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" style="color: var(--gold-bright);">
+                <circle cx="50" cy="50" r="44" stroke-dasharray="4 2" />
+                <path d="M50 16 C65 24 70 38 58 50 C46 62 50 78 68 84" />
+                <text x="50" y="58" font-family="'Cinzel Decorative', serif" font-size="28" fill="var(--gold-bright)" text-anchor="middle">⚜</text>
+              </svg>
+            </div>
+
+            <!-- Glowing Crack Line Overlay -->
+            <svg class="wax-seal-crack-line" viewBox="0 0 100 100" aria-hidden="true">
+              <path id="crack-path" class="crack-path-draw" d="M50 0 L52 35 L44 55 L58 75 L48 100" stroke="#ffd978" stroke-width="3" fill="none" />
+              <path class="crack-path-branch" d="M44 55 L28 65" stroke="#ffd978" stroke-width="2.5" fill="none" />
+              <path class="crack-path-branch" d="M58 75 L74 80" stroke="#ffd978" stroke-width="2.5" fill="none" />
+            </svg>
+          </div>
+        </button>
+
+        <!-- Press and Hold Prompt -->
+        <div class="seal-prompt glitch-target" id="seal-prompt-text">
+          Press and hold to break the seal.
+        </div>
+
+        <!-- Intro Controls: Sound Checkbox & Reduced-Motion Plain Open Button -->
+        <div class="intro-controls-row">
+          <label class="sound-checkbox-label glitch-target" for="intro-sound-checkbox">
+            <input type="checkbox" id="intro-sound-checkbox" checked />
+            <span>Play sound</span>
+          </label>
+          <button type="button" id="btn-reduced-open" class="btn-vintage btn-reduced-motion-only glitch-target">
+            Open ledger
+          </button>
+        </div>
+
+        <button type="button" id="btn-skip-intro" class="intro-skip-btn glitch-target" aria-label="Skip intro and open ledger">
+          Skip intro
+        </button>
+
+        <p class="intro-sponsor-note">
+          Seal forged by the Kapidhwaj Wardens, 
+          <a href="https://www.instagram.com/kapidhwaj.innovations/" target="_blank" rel="noopener" class="intro-sponsor-link glitch-target">
+            @kapidhwaj.innovations
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MAIN APPLICATION LAYOUT
+       ========================================================================== -->
+  <div class="app-wrapper" id="app-wrapper" inert aria-hidden="true" style="visibility: hidden;">
+    <main class="ledger-frame">
+      <!-- ⚜ Corner Fleur-de-lis Ornaments -->
+      <div class="corner-fleur corner-tl" aria-hidden="true">⚜</div>
+      <div class="corner-fleur corner-tr" aria-hidden="true">⚜</div>
+      <div class="corner-fleur corner-bl" aria-hidden="true">⚜</div>
+      <div class="corner-fleur corner-br" aria-hidden="true">⚜</div>
+
+      <!-- Top Utility Bar -->
+      <nav class="top-controls" aria-label="Ledger controls">
+        <div class="control-group">
+          <button type="button" id="btn-toggle-candle" class="btn-vintage glitch-target" aria-label="Toggle candlelight illumination mode">
+            <span>🕯️</span>
+            <span id="candle-text">Candlelight: On</span>
+          </button>
+          <button type="button" id="btn-toggle-view" class="btn-vintage glitch-target" aria-label="Toggle between Ledger Grid and Estate Map">
+            <span>🗺️</span>
+            <span>Estate Map</span>
+          </button>
+          <button type="button" id="btn-nav-sound" class="btn-vintage glitch-target" aria-label="Sound on/off" aria-pressed="false">
+            <span id="nav-sound-icon">🔇</span>
+            <span id="nav-sound-label">Sound: Off</span>
+          </button>
+        </div>
+
+        <div class="control-group">
+          <!-- Owl Post Portal -->
+          <button type="button" id="btn-owl-post" class="btn-vintage glitch-target" aria-label="Open Kapidhwaj Owl Post Portal">
+            <span>✉️</span>
+            <span>Owl Post</span>
+          </button>
+          <!-- Dark Lord's Journal -->
+          <button type="button" id="btn-journal-toggle" class="btn-vintage glitch-target" aria-label="Open Dark Lord's Journal Chronicle">
+            <span>📜</span>
+            <span>Dark Lord’s Journal</span>
+            <span id="journal-badge" class="unread-badge">1</span>
+          </button>
+          <!-- Shortcuts Guide -->
+          <button type="button" id="btn-shortcuts-help" class="btn-vintage glitch-target" aria-label="Show keyboard shortcuts">
+            <span>⌨</span>
+            <span>Shortcuts (?)</span>
+          </button>
+          <!-- Reset Ledger -->
+          <button type="button" id="btn-reset-ledger" class="btn-vintage btn-reset glitch-target" aria-label="Reset ledger records">
+            <span>↺</span>
+            <span>Reset Ledger</span>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Header Section -->
+      <header class="ledger-header">
+        <div class="sub-crest glitch-target">
+          <span>⚜</span> Estate Artifact Registry · Strictly Classified <span>⚜</span>
+        </div>
+
+        <div class="title-crypt-wrap">
+          <h1 id="crypt-main-title" class="main-title glitch-target" data-text="The Horcrux Ledger" tabindex="-1">
+            The Horcrux Ledger
+          </h1>
+        </div>
+
+        <div class="ornament-divider" aria-hidden="true">
+          <span class="ornament-leaf">❦</span>
+        </div>
+
+        <p class="ledger-subtitle glitch-target">
+          “Seven fragments cleaved from mortal flesh. What fools dare imagine my soul could ever perish?”
+        </p>
+
+        <!-- Dark Lord's Temper Gauge -->
+        <div class="temper-gauge-container" aria-label="Dark Lord's Temper and Registry Instability">
+          <div class="temper-header">
+            <span class="temper-label glitch-target">
+              <span>⚡</span> Dark Lord’s Temper:
+            </span>
+            <span id="temper-state-text" class="temper-state glitch-target">
+              Agitated & Restless (6 Lost)
+            </span>
+          </div>
+          <div class="temper-bar-track">
+            <div id="temper-fill-bar" class="temper-bar-fill"></div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ==========================================================================
+           SOUL INTEGRITY GAUGE (7-NOTCH VICTORIAN METER)
+           ========================================================================== -->
+      <section class="soul-gauge-section" aria-labelledby="soul-gauge-heading">
+        <div class="gauge-header">
+          <div id="soul-gauge-heading" class="gauge-title glitch-target">
+            <span>⚜</span> Soul Integrity Progress
+          </div>
+          <div id="gauge-counter-text" class="gauge-counter glitch-target" aria-live="polite">
+            1 of 7 fragments secured or warded
+          </div>
+        </div>
+
+        <div class="gauge-track" id="gauge-track" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="7" aria-label="Soul fragments secured or warded">
+          <div class="gauge-notch" data-notch="1">I</div>
+          <div class="gauge-notch" data-notch="2">II</div>
+          <div class="gauge-notch" data-notch="3">III</div>
+          <div class="gauge-notch" data-notch="4">IV</div>
+          <div class="gauge-notch" data-notch="5">V</div>
+          <div class="gauge-notch" data-notch="6">VI</div>
+          <div class="gauge-notch" data-notch="7">VII</div>
+        </div>
+
+        <!-- Finale Celebration Banner with Ember Particles -->
+        <div id="finale-banner" role="alert">
+          <div>⚜ The set is complete. Immortality assured. ⚜</div>
+          <p style="font-size: 0.95rem; font-family: var(--font-heading); font-style: italic; margin-top: 0.4rem; color: var(--parchment);">
+            “Death itself bows before the sovereign master of mortality.”
+          </p>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           FILTER CHIPS, SEARCH & SORT CONTROLS
+           ========================================================================== -->
+      <section class="toolbar-section" aria-label="Filter and search registry">
+        <div class="toolbar-row">
+          <!-- Search input with shortcut '/' -->
+          <div class="search-wrap">
+            <span class="search-icon" aria-hidden="true">🔍</span>
+            <input
+              type="search"
+              id="search-input"
+              class="search-input glitch-target"
+              placeholder="Search fragment, location, or clue..."
+              aria-label="Search fragment, location, or clue"
+            />
+            <span class="search-shortcut-badge" aria-hidden="true">/</span>
+          </div>
+
+          <!-- Sort dropdown -->
+          <div class="sort-control">
+            <label for="sort-select" class="sort-label glitch-target">Sort by:</label>
+            <select id="sort-select" class="sort-select glitch-target" aria-label="Sort Horcruxes">
+              <option value="number">Roman Numeral (I – VII)</option>
+              <option value="status">Status (Lost → Warded)</option>
+              <option value="name">Name (A – Z)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Filter Chips with live counts -->
+        <div class="filter-chips" role="group" aria-label="Filter fragments by status">
+          <button type="button" class="chip glitch-target active" data-filter="all" aria-pressed="true">
+            <span>All</span>
+            <span class="chip-count" id="count-all">(7)</span>
+          </button>
+          <button type="button" class="chip glitch-target" data-filter="Lost" aria-pressed="false">
+            <span>Lost</span>
+            <span class="chip-count" id="count-lost">(6)</span>
+          </button>
+          <button type="button" class="chip glitch-target" data-filter="Traced" aria-pressed="false">
+            <span>Traced</span>
+            <span class="chip-count" id="count-traced">(1)</span>
+          </button>
+          <button type="button" class="chip glitch-target" data-filter="Recovered" aria-pressed="false">
+            <span>Recovered</span>
+            <span class="chip-count" id="count-recovered">(0)</span>
+          </button>
+          <button type="button" class="chip glitch-target" data-filter="Warded" aria-pressed="false">
+            <span>Warded</span>
+            <span class="chip-count" id="count-warded">(0)</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           ESTATE SURVEY MAP VIEW (ALTERNATIVE VIEW)
+           ========================================================================== -->
+      <section id="estate-map-view" aria-label="Estate Survey Map">
+        <div class="map-header">
+          <h2 class="map-title glitch-target">Estate Survey & Realm Chart</h2>
+          <p class="map-sub glitch-target">
+            “Cartography of the Dark Lord’s soul fragments across the British Isles. Hover pins to inspect sanctuary holdings.”
+          </p>
+        </div>
+        <div class="estate-map-svg-wrap">
+          <svg viewBox="0 0 800 550" class="estate-survey-svg" style="width: 100%; height: auto; display: block;">
+            <!-- Grid Lines -->
+            <defs>
+              <pattern id="surveyGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(201, 162, 77, 0.08)" stroke-width="1" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#surveyGrid)" />
+
+            <!-- Great Britain Coastline Approximation (Survey Aesthetic) -->
+            <path d="M 330 60 C 370 80 430 110 400 170 C 440 220 460 270 510 320 C 560 360 620 400 600 460 C 560 510 440 500 380 470 C 310 460 230 450 200 480 C 160 490 140 450 180 430 C 240 410 300 370 330 320 C 310 270 290 220 310 160 Z" fill="rgba(29, 22, 18, 0.6)" stroke="var(--gold-dim)" stroke-width="1.8" stroke-dasharray="6 3" />
+
+            <!-- Compass Rose -->
+            <g transform="translate(110, 110)">
+              <circle cx="0" cy="0" r="35" fill="none" stroke="var(--gold-dim)" stroke-width="1" />
+              <polygon points="0,-40 6,-8 0,-4 -6,-8" fill="var(--gold-bright)" />
+              <polygon points="0,40 6,8 0,4 -6,8" fill="var(--gold-dim)" />
+              <polygon points="-40,0 -8,-6 -4,0 -8,6" fill="var(--gold-dim)" />
+              <polygon points="40,0 8,-6 4,0 8,6" fill="var(--gold-dim)" />
+              <text x="0" y="-46" fill="var(--gold-bright)" font-family="Cinzel Decorative" font-size="12" text-anchor="middle">N</text>
+            </g>
+
+            <!-- Map Pins Container -->
+            <g id="map-pins-container"></g>
+          </svg>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SYMMETRICAL 4x2 GRID (7 HORCRUX CARDS + 1 SPONSOR CARD)
+           ========================================================================== -->
+      <section id="main-ledger-grid" class="ledger-grid" aria-label="Artifact Registry Cards">
+        <!-- Injected via JavaScript for reactive state & stamps -->
+      </section>
+
+      <!-- Empty State -->
+      <div id="empty-state" role="status" style="display: none; text-align: center; padding: 3rem 1.5rem;">
+        <div class="empty-state-title glitch-target" style="font-family: var(--font-title); font-size: 1.4rem; color: var(--gold-bright);">
+          No fragment answers to that name.
+        </div>
+        <div class="empty-state-desc glitch-target" style="font-family: var(--font-heading); font-style: italic; color: var(--parchment-dim); margin-top: 0.5rem;">
+          Search the shadows again, or adjust your filter.
+        </div>
+      </div>
+
+      <!-- Footer with Sponsor Credit -->
+      <footer class="ledger-footer">
+        <div class="ornament-divider" aria-hidden="true">
+          <span class="ornament-leaf">❦</span>
+        </div>
+        <p class="glitch-target">
+          Warded under the arcane covenants of 
+          <a href="https://www.instagram.com/kapidhwaj.innovations/" target="_blank" rel="noopener noreferrer" class="footer-sponsor-link glitch-target">
+            <span>⚜</span> The Kapidhwaj Wardens · @kapidhwaj.innovations ↗
+          </a>
+        </p>
+        <p style="font-size: 0.85rem; color: var(--parchment-faint);" class="glitch-target">
+          The Horcrux Ledger · Lord Voldemort’s Sanctuary Archives · Forged in Victorian shadows.
+          <button type="button" id="btn-replay-intro" class="footer-replay-btn glitch-target" aria-label="Replay sealed ledger intro sequence">
+            ⚜ Replay Intro ⚜
+          </button>
+        </p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- ==========================================================================
+       OWL POST PORTAL (WARDEN LETTER MODAL)
+       ========================================================================== -->
+  <div id="owl-post-modal" role="dialog" aria-modal="true" aria-labelledby="owl-post-title">
+    <div class="envelope-wrapper">
+      <div class="corner-fleur corner-tl" aria-hidden="true">⚜</div>
+      <div class="corner-fleur corner-tr" aria-hidden="true">⚜</div>
+      <div class="corner-fleur corner-bl" aria-hidden="true">⚜</div>
+      <div class="corner-fleur corner-br" aria-hidden="true">⚜</div>
+
+      <div style="text-align: center; margin-bottom: 0.75rem;">
+        <span style="font-size: 2.2rem; color: var(--gold-bright);">🦉</span>
+      </div>
+      <h2 id="owl-post-title" class="envelope-letter-title glitch-target">
+        The Kapidhwaj Wardens’ Dispatch
+      </h2>
+      <div style="text-align: center; font-size: 0.85rem; color: var(--gold); letter-spacing: 0.1em; font-family: var(--font-title);">
+        VIA NOCTURNAL PARCHMENT EXPRESS
+      </div>
+
+      <div class="envelope-letter-body glitch-target">
+        “My Lord Voldemort — Our forge burns night and day. The seven containment matrixes stand ready. Whenever a fragment is brought forth from the realm of men, our blood wards shall seal it beyond mortal comprehension. Await our signal.”
+      </div>
+
+      <div class="envelope-actions">
+        <a href="https://www.instagram.com/kapidhwaj.innovations/" target="_blank" rel="noopener noreferrer" class="btn-seek-wardens glitch-target" style="width: 100%;">
+          <span>Send an owl to @kapidhwaj.innovations ↗</span>
+        </a>
+        <button type="button" id="btn-close-owl" class="btn-vintage glitch-target" style="width: 100%; justify-content: center;">
+          Fold Dispatch & Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       DARK LORD'S JOURNAL (MODAL)
+       ========================================================================== -->
+  <div id="journal-modal" role="dialog" aria-modal="true" aria-labelledby="journal-modal-title">
+    <div class="journal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-gold); padding-bottom: 0.85rem;">
+        <div>
+          <h2 id="journal-modal-title" class="history-title glitch-target" style="font-family: var(--font-title); font-size: 1.4rem; color: var(--gold-bright);">
+            The Dark Lord’s Journal
+          </h2>
+          <div style="font-family: var(--font-heading); font-style: italic; color: var(--parchment-dim); font-size: 0.92rem;">
+            Confidential audit log of fragment movements & Voldemort’s wrath
+          </div>
+        </div>
+        <button type="button" id="btn-close-journal" class="drawer-close-btn glitch-target" aria-label="Close journal">✕</button>
+      </div>
+
+      <div class="journal-list" id="journal-list" role="feed" aria-label="Dark Lord's Journal entries">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       DOSSIER DRAWER (SIDE DRAWER / BOTTOM SHEET)
+       ========================================================================== -->
+  <div id="dossier-backdrop" aria-hidden="true"></div>
+  <aside id="dossier-drawer" role="dialog" aria-modal="true" aria-labelledby="dossier-name" aria-hidden="true">
+    <div class="drawer-header">
+      <div>
+        <span id="dossier-numeral" class="dossier-numeral glitch-target">I</span>
+        <h2 id="dossier-name" class="dossier-title glitch-target">Tom Riddle’s Diary</h2>
+        <div id="dossier-location" class="dossier-loc glitch-target">Chamber of Secrets, Hogwarts</div>
+      </div>
+      <button type="button" id="btn-close-dossier" class="drawer-close-btn glitch-target" aria-label="Close dossier">✕</button>
+    </div>
+
+    <!-- Last Known Provenance -->
+    <div class="dossier-section-title glitch-target">
+      <span>⚜</span> Last Known Provenance
+    </div>
+    <div id="dossier-last-seen" class="dossier-card-quote glitch-target">
+      Hogwarts Castle, Slytherin’s Chamber, circa June 1993.
+    </div>
+
+    <!-- The Dark Lord's Clue -->
+    <div class="dossier-section-title glitch-target">
+      <span>⚜</span> Lord Voldemort’s Secret Clue
+    </div>
+    <div id="dossier-clue-text" class="dossier-card-quote glitch-target">
+      —
+    </div>
+
+    <!-- Ward Strength Slider (Kapidhwaj Contract) -->
+    <div class="dossier-section-title glitch-target">
+      <span>⚜</span> Kapidhwaj Ward Contract Strength
+    </div>
+    <div class="ward-slider-wrap">
+      <div class="ward-slider-label">
+        <span class="glitch-target">Arcane Containment Rating:</span>
+        <span id="ward-strength-val" class="glitch-target">75%</span>
+      </div>
+      <input type="range" id="ward-strength-slider" class="ward-slider" min="10" max="100" value="75" aria-label="Ward contract strength slider" />
+      <div style="font-size: 0.8rem; font-style: italic; color: var(--parchment-faint);" class="glitch-target">
+        Certified by The Kapidhwaj Wardens (@kapidhwaj.innovations)
+      </div>
+    </div>
+
+    <!-- Ward Certificate (Visible only when status is Warded) -->
+    <div id="ward-certificate">
+      <div class="cert-seal">⚜</div>
+      <div class="cert-heading glitch-target">Kapidhwaj Ward Certificate</div>
+      <div class="cert-desc glitch-target">
+        “Certified Warded under the Ancient Aegis of The Kapidhwaj Wardens. Sealed behind impenetrable containment wards against mortal thieves.”
+      </div>
+      <a href="https://www.instagram.com/kapidhwaj.innovations/" target="_blank" rel="noopener noreferrer" class="cert-link glitch-target" style="display: inline-block; margin-top: 0.5rem; color: var(--gold-bright); font-size: 0.9rem; text-decoration: underline;">
+        Inspect Ward Guild @kapidhwaj.innovations ↗
+      </a>
+    </div>
+
+    <!-- Status Advance Controller in Drawer -->
+    <div class="dossier-section-title glitch-target">
+      <span>⚜</span> Containment Status
+    </div>
+    <div class="dossier-status-picker" role="radiogroup" aria-label="Set Horcrux Status" style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+      <button type="button" class="btn-vintage status-pick-btn glitch-target" data-set-status="Lost">Lost</button>
+      <button type="button" class="btn-vintage status-pick-btn glitch-target" data-set-status="Traced">Traced</button>
+      <button type="button" class="btn-vintage status-pick-btn glitch-target" data-set-status="Recovered">Recovered</button>
+      <button type="button" class="btn-vintage status-pick-btn glitch-target" data-set-status="Warded">Warded</button>
+    </div>
+
+    <!-- Field Notes Textarea (Persisted) -->
+    <div class="dossier-section-title glitch-target" style="margin-top: 0.5rem;">
+      <span>⚜</span> The Dark Lord’s Field Notes
+    </div>
+    <textarea id="dossier-field-notes" class="field-notes-area glitch-target" placeholder="Record confidential surveillance, death eater whispers, or counter-curses..."></textarea>
+
+    <!-- Print Dossier Button -->
+    <div style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border-gold);">
+      <button type="button" id="btn-print-dossier" class="btn-vintage glitch-target" style="width: 100%; justify-content: center;">
+        <span>🖨️</span> <span>Print Victorian Certificate</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       RESET CONFIRMATION DIALOG (MODAL)
+       ========================================================================== -->
+  <div id="reset-dialog-backdrop" role="dialog" aria-modal="true" aria-labelledby="reset-dialog-title">
+    <div class="reset-dialog-box">
+      <div class="corner-fleur corner-tl" aria-hidden="true">⚜</div>
+      <div class="corner-fleur corner-tr" aria-hidden="true">⚜</div>
+      <h3 id="reset-dialog-title" class="reset-dialog-title glitch-target">Reset the Sacred Ledger?</h3>
+      <p class="reset-dialog-desc glitch-target">
+        “Shall you break every seal, erase all field notes, and plunge the seven fragments back into the shadows of the realm?”
+      </p>
+      <div class="reset-dialog-actions">
+        <button type="button" id="btn-confirm-reset" class="btn-dialog-confirm glitch-target">Break All Seals</button>
+        <button type="button" id="btn-cancel-reset" class="btn-dialog-cancel glitch-target">Preserve Records</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       SHORTCUTS POPOVER MODAL
+       ========================================================================== -->
+  <div id="shortcuts-modal" role="dialog" aria-modal="true" aria-labelledby="shortcuts-title">
+    <div class="shortcuts-box">
+      <h3 id="shortcuts-title" class="reset-dialog-title glitch-target" style="margin-bottom: 0.5rem; color: var(--gold-bright);">
+        Keyboard Shortcuts
+      </h3>
+      <p style="font-size: 0.95rem; color: var(--parchment-dim); font-style: italic;" class="glitch-target">
+        Ancient keystrokes to command the ledger:
+      </p>
+
+      <table class="shortcuts-table">
+        <tbody>
+          <tr>
+            <td><span class="kbd-badge">/</span></td>
+            <td class="glitch-target">Focus search input</td>
+          </tr>
+          <tr>
+            <td><span class="kbd-badge">1 – 7</span></td>
+            <td class="glitch-target">Open dossier for fragment I through VII</td>
+          </tr>
+          <tr>
+            <td><span class="kbd-badge">Esc</span></td>
+            <td class="glitch-target">Close dossier or dismiss modals</td>
+          </tr>
+          <tr>
+            <td><span class="kbd-badge">?</span></td>
+            <td class="glitch-target">Toggle this shortcuts guide</td>
+          </tr>
+          <tr>
+            <td><span class="kbd-badge">“tom”</span></td>
+            <td class="glitch-target">Whisper the secret name anywhere</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="text-align: center; margin-top: 1rem;">
+        <button type="button" id="btn-close-shortcuts" class="btn-vintage glitch-target" style="min-width: 120px; justify-content: center;">
+          Understood
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Announcement Region -->
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Hidden Easter Egg Display -->
+  <div id="easter-egg-overlay" aria-hidden="true">
+    <div class="easter-egg-text glitch-target">TOM RIDDLE WAS HERE.</div>
+    <div class="easter-egg-sub glitch-target" style="color: var(--parchment); font-family: var(--font-heading); font-style: italic; font-size: 1.3rem; margin-top: 0.75rem;">
+      The ink of memory refuses to drown.
+    </div>
+  </div>
+
+  <!-- Vanilla JavaScript Application -->
+  <script src="./app.js"></script>
+</body>
+</html>
